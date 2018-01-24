@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<title>Aruba RAP Bulk Updater</title>
+
+<style>
+	body {
+		background: #ddd;
+	}
+	.table-editable {
+		position: relative;
+	}
+
+	.table-editable .glyphicon {
+		font-size: 20px;
+	}
+
+	.del-row {
+		color: #990000;
+	}
+
+	.del-row:hover {
+		color: #ff0000;
+	}
+
+	.add-row, .del-row  {
+		cursor: pointer;
+		padding-right: 0;
+	}
+
+	.add-row {
+		color: #007700;
+	}
+
+	.add-row:hover {
+		color: #00BB00;
+	}
+
+	.container{
+		margin: 1em auto;
+		background: white;
+		padding: 18px;
+		border-radius: 8px;
+		border-bottom: 6px solid #ccc;
+		border-left: 1px solid #ccc;
+	}
+
+	.glyphicon {
+		top: 5px;
+	}
+
+	.glyphicon-remove-sign,
+	.glyphicon-ok-sign {
+		position: relative;
+		top: 8px;
+		color:red;
+		font-size: 2em;
+	}
+	
+	.glyphicon-ok-sign {
+		color: green;
+	}
+
+	#whitelist-div {
+		margin-top: 2em;
+	}
+	
+	#whitelist-cmds {
+		margin-bottom: 1em;
+	}
+
+	@media (min-width: 1600px) {
+		.container {
+			width: 1400px;
+		}
+	}
+</style>
+</head>
+
+<body>
+	<main>
+		<div class="container">
+			<h1>Aruba RAP Bulk Updater</h1>
+			<p>This portable web-page uses Aruba Activate's API to quickly update RAP inventory information in bulk. Because all requests are sent directly to Aruba Activate from your browser, you<strong> must disable the cross-origin policy</strong> in your browser in order to use this page. However, please note that doing so is a security risk and is not normally recommended. It should only be used with this page and enabled again before navigating to other websites.</p>
+			<p>When submitting updates, <strong>blank entries in</strong> the table <strong>irreversibly overwrite</strong> their corresponding values in Aruba Activate. The table can also be populated by importing a CSV file. Importing from a CSV file will <strong>overwrite current entries</strong> in the table. The CSV file must be <strong>comma delimited</strong>, must contain a <strong>header row</strong>, and values must be in the <strong>same sequence</strong> as shown in the table below (i.e. MAC, Folder, AP Name, etc.). Note that the 'Controller AP Group' field is optional and is only used when generating Aruba controller whitelist commands. </p>
+			<p>Login with your Aruba Activate credentials to get started. </p>
+			<br>
+			<div class="form-inline">
+				<input id="user" type="text" class="form-control" placeholder="Username">
+				<input id="pass" type="password" class="form-control" placeholder="Password">
+				<button id="login-btn" class="btn btn-primary form-control">Login</button>
+				<span id="auth-result-icon" class="glyphicon"></span>
+			</div>
+		<hr>
+		<div id="table" class="table-editable">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>MAC</th>
+						<th>Folder</th>
+						<th>AP Name</th>
+						<th>Full Name</th>
+						<th>Description</th>
+						<th>Controller AP Group</th>
+						<th><span class="add-row glyphicon glyphicon-plus-sign"></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="form-group">
+						<td><input type="text" class="form-control" placeholder="00:00:00:00:00:00"></td>
+						<td><input class="form-control" placeholder="Folder"></td>
+						<td><input class="form-control" placeholder="AP Name"></td>
+						<td><input class="form-control" placeholder="Full Name"></td>
+						<td><input class="form-control" placeholder="Description"></td>
+						<td><input class="form-control" placeholder="Controller AP Group" ></td>
+						<td style="width:3em"><span class="del-row glyphicon glyphicon-minus-sign"></span></td>
+					</tr>
+					<tr class="form-group">
+						<td><input type="text" class="form-control" placeholder="00:00:00:00:00:00"></td>
+						<td><input class="form-control" placeholder="Folder"></td>
+						<td><input class="form-control" placeholder="AP Name"></td>
+						<td><input class="form-control" placeholder="Full Name"></td>
+						<td><input class="form-control" placeholder="Description"></td>
+						<td><input class="form-control" placeholder="Controller AP Group" ></td>
+						<td style="width:3em"><span class="del-row glyphicon glyphicon-minus-sign"></span></td>
+					</tr><tr class="form-group hide">
+						<td><input type="text" class="form-control" placeholder="00:00:00:00:00:00"></td>
+						<td><input class="form-control" placeholder="Folder"></td>
+						<td><input class="form-control" placeholder="AP Name"></td>
+						<td><input class="form-control" placeholder="Full Name"></td>
+						<td><input class="form-control" placeholder="Description"></td>
+						<td><input class="form-control" placeholder="Controller AP Group" ></td>
+						<td style="width:3em"><span class="del-row glyphicon glyphicon-minus-sign"></span></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<hr>
+			<label class="btn btn-primary">
+				Import from CSV...<input id="import-btn" type="file" accept=".csv" style="display: none;">
+			</label>
+			<button id="update-btn" class="btn btn-primary">Send Updates to Activate</button>
+			<button id="cmd-btn" class="btn btn-primary">Generate Whitelist Cmds</button>
+			<div id="whitelist-div" class="hide">
+				<pre id="whitelist-cmds"></pre>
+				<button id="copy-btn" class="btn btn-primary">Copy to Clipboard</button>
+			</div>
+		</div>
+	</main>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script>
+// Add shift() to jQuery prototype
+$.fn.shift = [].shift;
+
+// Copy CMDs to Clipboard
+$('#copy-btn').click(function(event) {
+  var $tempTextarea = $("<textarea style='whitespace:pre'></textarea>");
+  $('body').append($tempTextarea);
+  $tempTextarea.val($('#whitelist-cmds').text()).select();
+  document.execCommand("copy");
+  $tempTextarea.remove();
+})
+
+// Aruba Activate Logon
+$('#login-btn').click(function(event) {
+	var username = $("#user").val();
+	var password = $("#pass").val();
+	if (username && password) { // If username or password values are not empty...
+		// Send Aruba Activate login request
+    $.ajax({
+      "url": "https://activate.arubanetworks.com/LOGIN",
+      "method": "POST",
+      "headers": {"cache-control": "no-cache"},
+      "data": "credential_0=" + username + "&credential_1=" + password + "&destination=null"
+    })
+    .done(function(response) {
+      $('#auth-result-icon').switchClass( "glyphicon-remove-sign", "glyphicon-ok-sign", 100);
+    })
+    .fail(function (response){
+      console.log(response.responseText); // Log the response text for the failure
+      $('#auth-result-icon').switchClass( "glyphicon-ok-sign", "glyphicon-remove-sign", 100);
+    });
+  } else {
+		// If username and/or password is blank, indicate auth failure without sending request
+    $('#auth-result-icon').switchClass( "glyphicon-ok-sign", "glyphicon-remove-sign", 100);
+  }
+});
+
+// Aruba Activate Inventory Update
+$('#update-btn').click(function(event) {
+	var confirm = window.confirm("All entries (including blank values) will be sent to Aruba Activate.\n\nThis action CANNOT be undone!");
+	if (confirm) {
+		$(".error").remove(); // Remove any previously added error rows
+		var $rows = $('#table').find('tr:not(:hidden)');
+		$rows.shift(); // Exclude header row
+		var keys = ['mac','folderName','deviceName','deviceFullName','deviceDescription'];
+		var json = {}; 
+		json ["devices"] = [];
+		// For each table row...
+		$rows.each(function(rowIndex) {
+			var $input = $(this).find('td input');
+			var dict = {};
+			// Set the value for each key to the value of each input
+			keys.forEach(function(value, index) {
+				dict[value] = $input.eq(index).val();
+			});
+			json["devices"] = [dict];
+			// Send the inventory update to Aruba Activate
+			$.ajax({
+				"url": "https://activate.arubanetworks.com/api/ext/inventory.json?action=update",
+				"method": "POST",
+				"headers": {"cache-control": "no-cache"},
+				"data": "json=" + JSON.stringify(json)
+			})
+			.done(function(response) {
+				// If 'message.code' properties exist and code is 0...
+				if (response.hasOwnProperty('message') && response.message.hasOwnProperty('code') && response.message.code == 0) {
+					// Color the row green
+					$input.parent().parent().css("background-color","#C1FCC1")
+				}
+				// If 'errors' property exists...
+				else if (response.hasOwnProperty('errors')) {
+					// color the row red and display the first error
+					$input.parent().parent().css("background-color","#FFE0E0");
+					$($rows[rowIndex]).after('<tr class="error" style="background-color:#FFE0E0"><td style="text-indent:40px" colspan="7">' + (response.errors[0].errMessage).toString() + '</tr>')
+				}	
+				// If 'failure' property exists...
+				else if (response.hasOwnProperty('failure')) {
+					// Color the row red and display the message
+					$input.parent().parent().css("background-color","#FFE0E0");
+					$($rows[rowIndex]).after('<tr class="error" style="background-color:#FFE0E0"><td style="text-indent:40px" colspan="7">' + (response.failure).toString() + '</tr>')
+				}
+				else { 
+					// Color the row red and log the entire response
+					$input.parent().parent().css("background-color","#FFE0E0");
+					console.log(response)
+				}
+			})
+			.fail(function (response){
+				// Color the row red and log the entire response
+				$input.parent().parent().css("background-color","#FFE0E0");
+				console.log(response);
+			});
+		});
+	}
+});
+
+// Table Operations
+$('.add-row').click(function(event) {
+	// Use the hidden row as a template and append to the table
+	var $hiddenRow = $('#table').find('tr.hide').clone(true).removeClass('hide table-line');
+	$('#table').find('table').append($hiddenRow);
+});
+
+$('.del-row').click(function(event) {
+	// Remove the related error row if it exists
+	if ($(this).parents('tr').next().hasClass("error")) {
+			$(this).parents('tr').next().detach();
+			}
+	$(this).parents('tr').detach(); // Then remove the row
+});
+
+// Whitelist CMDs 
+$('#cmd-btn').click(function(event) {
+	$('#whitelist-div').removeClass('hide')
+	var $rows = $('#table').find('tr:not(:hidden)');
+	$rows.shift() // Exlcude header row
+	var $commands = $("#whitelist-cmds");
+	$commands.text(null) // Clear existing entries
+	// For each table row...
+	$rows.each(function (rowIndex) {
+		if (!$(this).hasClass('error')) { // If not an error row
+			var $input = $(this).find('td input');
+			var mac = $input.eq(0).val();
+			var apName = $input.eq(2).val();
+			var fullName = $input.eq(3).val();
+			var description = $input.eq(4).val();
+			var apGroup = $input.eq(5).val();
+			$commands.append(
+				"whitelist-db rap add mac " + mac 
+				+ " ap-group \"" + apGroup 
+				+ "\" ap-name \"" + apName	 
+				+ "\" full-name \"" + fullName 
+				+ "\" description \"" + description 
+				+ "\"" + "\n"
+			)
+		}
+	});
+});
+
+// CSV Import
+$('#import-btn').change(function(event) {
+	var data = null;
+	var file = event.target.files[0];
+	var reader = new FileReader();
+	reader.readAsText(file);
+	reader.onload = function(event) {
+		var $rows = $('#table').find('tr:not(:hidden)');
+		$rows.shift(); // Exclude header row
+		$rows.detach(); // Remove previously added rows
+		var importedData = [];
+		var lines = this.result.split('\n');
+		lines.shift();
+		// For each line in the file...
+		for(var line = 0; line < lines.length; line++){
+			// Turn the line into an array and append to importedData
+			var list = lines[line].split(',');
+			importedData.push(list);
+		}
+		// For each row in importedData...
+		for(var importedRow = 0; importedRow < importedData.length; importedRow++){
+			// Create a new row in the table
+			var $hiddenRow = $('#table').find('tr.hide').clone(true).removeClass('hide table-line');
+			$('#table').find('table').append($hiddenRow);
+		}
+		var $rows = $('#table').find('tr:not(:hidden)');
+		$rows.shift(); //remove header row
+		// For each table row...
+		$rows.each(function(rowIndex){
+			var $input = $(this).find('td input');
+			// Set each input element's value to it's imported value
+			$input.each(function(tdIndex){
+				$(this).val(importedData[rowIndex][tdIndex]);
+			})
+		})
+	}
+	reader.onerror = function() {
+			alert('Unable to read ' + file.fileName);
+	}
+	$('#import-btn').val(null) // Needed for change to be triggered if same file is re-imported
+})
+</script>
+</body>
+</html>
