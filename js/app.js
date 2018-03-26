@@ -1,3 +1,7 @@
+var baseURL = "https://activate.arubanetworks.com/";
+var APIDir = "api/ext/";
+var baseAPIURL = baseURL + APIDir;
+
 // Add shift() to jQuery prototype
 $.fn.shift = [].shift;
 
@@ -17,7 +21,7 @@ $('#login-btn').click(function() {
 	if (username && password) { // If username or password values are not empty...
 		// Send Aruba Activate login request
     $.ajax({
-      "url": "https://activate.arubanetworks.com/LOGIN",
+      "url": baseURL + "LOGIN",
       "method": "POST",
       "headers": {"cache-control": "no-cache"},
       "data": encodeURI("credential_0=" + username + "&credential_1=" + password + "&destination=null")
@@ -56,17 +60,17 @@ $('#update-btn').click(function() {
 			json.devices = [dict];
 			// Send the inventory update to Aruba Activate
 			$.ajax({
-				"url": "https://activate.arubanetworks.com/api/ext/inventory.json?action=update",
+				"url": baseAPIURL + "inventory.json?action=update",
 				"method": "POST",
 				"headers": {"cache-control": "no-cache"},
 				"data": encodeURI("json=" + JSON.stringify(json))
 			})
 			.done(function(response) {
 				// If 'message.code' properties exist and code is 0 and "1 Devices Updated"...
-				if (response.hasOwnProperty('message')
-						&& response.message.hasOwnProperty('code')
-						&& response.message.code === 0 
-						&& response.messae.tex === "1 Devices Updated") {
+				if (response.hasOwnProperty('message') &&
+						response.message.hasOwnProperty('code') &&
+						response.message.code === 0 &&
+						response.messae.tex === "1 Devices Updated") {
 					// Color the row green
 					$input.parent().parent().css("background-color","#C1FCC1");
 				}
@@ -129,12 +133,12 @@ $('#cmd-btn').click(function() {
 			var description = $input.eq(4).val();
 			var apGroup = $input.eq(5).val();
 			$commands.append(
-				"whitelist-db rap add mac " + mac 
-				+ " ap-group \"" + apGroup 
-				+ "\" ap-name \"" + apName	 
-				+ "\" full-name \"" + fullName 
-				+ "\" description \"" + description 
-				+ "\"" + "\n"
+				"whitelist-db rap add mac " + mac +
+				" ap-group \"" + apGroup +
+				"\" ap-name \"" + apName + 
+				"\" full-name \"" + fullName + 
+				"\" description \"" + description + 
+				"\"" + "\n"
 			);
 		}
 	});
