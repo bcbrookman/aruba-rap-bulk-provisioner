@@ -176,7 +176,7 @@ $('#login-btn').click(function(event) {
       "url": "https://activate.arubanetworks.com/LOGIN",
       "method": "POST",
       "headers": {"cache-control": "no-cache"},
-      "data": "credential_0=" + username + "&credential_1=" + password + "&destination=null"
+      "data": encodeURI("credential_0=" + username + "&credential_1=" + password + "&destination=null");
     })
     .done(function(response) {
       $('#auth-result-icon').switchClass( "glyphicon-remove-sign", "glyphicon-ok-sign", 100);
@@ -200,7 +200,7 @@ $('#update-btn').click(function(event) {
 		$rows.shift(); // Exclude header row
 		var keys = ['mac','folderName','deviceName','deviceFullName','deviceDescription'];
 		var json = {}; 
-		json ["devices"] = [];
+		json["devices"] = [];
 		// For each table row...
 		$rows.each(function(rowIndex) {
 			var $input = $(this).find('td input');
@@ -215,11 +215,14 @@ $('#update-btn').click(function(event) {
 				"url": "https://activate.arubanetworks.com/api/ext/inventory.json?action=update",
 				"method": "POST",
 				"headers": {"cache-control": "no-cache"},
-				"data": "json=" + JSON.stringify(json)
+				"data": encodeURI("json=" + JSON.stringify(json))
 			})
 			.done(function(response) {
-				// If 'message.code' properties exist and code is 0...
-				if (response.hasOwnProperty('message') && response.message.hasOwnProperty('code') && response.message.code == 0) {
+				// If 'message.code' properties exist and code is 0 and "1 Devices Updated"...
+				if (response.hasOwnProperty('message')
+						&& response.message.hasOwnProperty('code')
+						&& response.message.code == 0 
+						&& response.messae.tex == "1 Devices Updated") {
 					// Color the row green
 					$input.parent().parent().css("background-color","#C1FCC1")
 				}
