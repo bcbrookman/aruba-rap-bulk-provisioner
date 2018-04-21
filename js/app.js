@@ -70,7 +70,7 @@ $('#update-btn').click(function() {
 				if (response.hasOwnProperty('message') &&
 						response.message.hasOwnProperty('code') &&
 						response.message.code === 0 &&
-						response.messae.tex === "1 Devices Updated") {
+						response.message.text === "1 Devices Updated") {
 					// Color the row green
 					$input.parent().parent().css("background-color","#C1FCC1");
 				}
