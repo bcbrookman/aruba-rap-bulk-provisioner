@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+ 
+{% block content %}
+<style>
+#search {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+}
+</style>
+
+<main>
+   <nav class="navbar navbar-default">
+		<div class="container">
+			<ul class="nav navbar-nav navbar-left" style="margin-left:-10px">
+				<li> <a href="/">Home</a></li>
+				<li> <a href="/search">Search</a></li>
+				<li> <a href="/update">Update</a></li>
+				<li> <a href="/bypass">Bypass</a></li>
+				<li class="active"> <a href="/controllers">Controllers</a></li>
+			</ul>
+		</div>
+	</nav>
+<div class="container content">
+            <h1>Controller Reference</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+			<hr>
+    <div class="form-group">
+        <input id="search" class="mx-auto d-block form-control text-center" name="search" placeholder="Search Controllers" type="search" data-toggle="hideseek" data-list=".default_list" autocomplete="off">
+<table class="table table-hover">
+		<thead class="thead-light">
+			<th scope="col">Location</th>
+			<th scope="col">HA Role #1</th>
+			<th scope="col">Short Name</th>
+			<th scope="col">Internal FQDN</th>
+			<th scope="col">MGMT IP</th>
+            <th scope="col">RAP Virtual IP</th>
+		</thead>
+		<tbody class="default_list">
+            <tr><td>​​CDC</td><td>Master</td><td>CDC X7</td><td>icacdcx7-kpca.crdc.kp.org</td><td>162.119.239.22</td><td>162.119.232.69</td></tr>
+            <tr><td>​​CDC</td><td>Backup</td><td>CDC X8</td><td>icacdcx8-kpca.crdc.kp.org</td><td>162.119.239.23</td><td>162.119.232.69</td></tr>
+            <tr><td>​​CDC</td><td>Master</td><td>CDC X9</td><td>icacdcx9-kpca-in.kp.org</td><td>162.119.239.35</td><td>162.119.232.72</td></tr>
+            <tr><td>​​CDC</td><td>Backup</td><td>CDC X10</td><td>icacdcx10-kpca-in.kp.org</td><td>162.119.239.36</td><td>162.119.232.72</td></tr>
+            <tr><td>​​CDC</td><td>Master</td><td>CDC X11</td><td>icacdcx11-kpca-in.kp.org</td><td>162.119.239.40</td><td>162.119.226.22</td></tr>
+            <tr><td>​​CDC</td><td>Backup</td><td>CDC X12</td><td>icacdcx12-kpca-in.kp.org</td><td>162.119.239.41</td><td>162.119.226.22</td></tr>
+            <tr><td>​CDC</td><td>Master</td><td>CDC X13</td><td>icacdcx13-kpca-in.kp.org</td><td>162.119.239.45</td><td>162.119.226.25</td></tr>
+            <tr><td>​CDC</td><td>Backup</td><td>CDC X14</td><td>icacdcx14-kpca-in.kp.org</td><td>162.119.239.46</td><td>162.119.226.25</td></tr>
+            <tr><td>CDC</td><td>Master</td><td>CDC X15</td><td>icacdcx15-kpca-in.kp.org</td><td>162.119.239.50</td><td>162.119.226.28</td></tr>
+            <tr><td>CDC</td><td>Backup</td><td>CDC X16</td><td>icacdcx16-kpca-in.kp.org</td><td>162.119.239.51</td><td>162.119.226.28</td></tr>
+            <tr><td>NDC</td><td>N/A</td><td>NDC X3</td><td>icandcx3-lb.nndc.kp.org</td><td>162.119.151.46</td><td>162.119.151.46</td></tr>
+            <tr><td>NDC</td><td>N/A</td><td>NDC X4</td><td>icandcx4-lb.nndc.kp.org</td><td>162.119.151.47</td><td>162.119.151.47</td></tr>
+            <tr><td>NDC</td><td>Master</td><td>NDC X9</td><td>icandcx9-lb.nndc.kp.org</td><td>162.119.151.55</td><td>162.119.131.241</td></tr>
+            <tr><td>NDC</td><td>Backup</td><td>NDC X10</td><td>icandcx10-lb.nndc.kp.org</td><td>162.119.151.56</td><td>162.119.131.241</td></tr>
+            <tr><td>NDC</td><td>Master</td><td>NDC X11</td><td>icandcx11-kpca.nndc.kp.org</td><td>162.119.151.22</td><td>162.119.131.224</td></tr>
+            <tr><td>NDC</td><td>Backup</td><td>NDC X12</td><td>icandcx12-kpca.nndc.kp.org</td><td>162.119.151.23</td><td>162.119.131.224</td></tr>
+            <tr><td>NDC</td><td>Master</td><td>NDC X15</td><td>icandcx15-kpca-in.nndc.kp.org</td><td>162.119.151.26</td><td>162.119.131.118</td></tr>
+            <tr><td>NDC</td><td>Backup</td><td>NDC X16</td><td>icandcx16-kpca-in.nndc.kp.org</td><td>162.119.151.27</td><td>162.119.131.118</td></tr>
+            <tr><td>NDC</td><td>Master</td><td>NDC X17</td><td>icandcx17-kpca-in.nndc.kp.org</td><td>162.119.151.31</td><td>162.119.131.121</td></tr>
+            <tr><td>NDC</td><td>Backup</td><td>NDC X18</td><td>icandcx18-kpca-in.nndc.kp.org</td><td>162.119.151.32</td><td>162.119.131.121</td></tr>
+            <tr><td>SSDC</td><td>Master</td><td>SIL X1</td><td>imdsilx1-arba.ssdc.kp.org</td><td>162.119.246.238</td><td>162.119.241.240</td></tr>
+            <tr><td>SSDC</td><td>Backup</td><td>SIL X2</td><td>imdsilx2-arba.ssdc.kp.org</td><td>162.119.246.239</td><td>162.119.241.240</td></tr>
+            <tr><td>SSDC</td><td>Master</td><td>SIL X7</td><td>imdsilx7-kpca-in.kp.org</td><td>162.119.246.34</td><td>162.119.241.232</td></tr>
+            <tr><td>SSDC</td><td>Backup</td><td>SIL X8</td><td>imdsilx8-kpca-in.kp.org</td><td>162.119.246.35</td><td>162.119.241.232</td></tr>
+            <tr><td>CO</td><td>Master</td><td>L3D X1</td><td>icol3dx1-kpca.l3dc.kp.org</td><td>162.119.1.20</td><td>162.119.0.22</td></tr>
+            <tr><td>CO</td><td>Backup</td><td>L3D X2</td><td>icol3dx2-kpca.l3dc.kp.org</td><td>162.119.1.21</td><td>162.119.0.22</td></tr>
+            <tr><td>NW</td><td>Master</td><td>L3S X1</td><td>iwal3sx1-kpca-lb.l3sc.kp.org</td><td>162.119.9.22</td><td>162.119.8.22</td></tr>
+            <tr><td>NW</td><td>Backup</td><td>L3S X2</td><td>iwal3sx2-kpca-lb.l3sc.kp.org</td><td>162.119.9.23</td><td>162.119.8.22</td></tr>
+        </tbody>
+</table>
+</main>
+{% endblock %}

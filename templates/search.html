@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+#search {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+}
+
+#results {
+    max-width: 60%;
+    margin-bottom: 1em;
+    margin: 2em auto;
+    padding: 0 2em;
+}
+
+table tbody tr th {
+	text-align: right;
+	padding: 0.5em;
+}
+
+.pull-left {
+	width: 60%;
+}
+
+.pull-right {
+	width: 40%;
+}
+
+.result-info img{
+    max-height: 280px;
+    margin: auto;
+}
+
+</style>
+<main>
+   <nav class="navbar navbar-default">
+		<div class="container">
+			<ul class="nav navbar-nav navbar-left" style="margin-left:-10px">
+				<li> <a href="/">Home</a></li>
+				<li class="active"> <a href="/search">Search</a></li>
+				<li> <a href="/update">Update</a></li>
+				<li> <a href="/bypass">Bypass</a></li>
+				<li> <a href="/controllers">Controllers</a></li>
+			</ul>
+		</div>
+	</nav>
+<div class="container content">
+	<h1>Search RAPs</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+	<hr>
+			<form id="search-form" class="form-group" style="text-align:center">
+				<p><label for="search">Search by MAC Address or Serial Number:</label></p>
+				<input id="search" type="search" class="mx-auto d-block form-control text-center" placeholder="Search">
+				<button id="search-btn" type='button' class="btn btn-primary">Search</button>
+			</form>
+
+<div id="results" class="hidden">
+	<hr>
+	<div class="result-info pull-right">
+		<img class="center-block" src="/static/img/JY689A.jpg">
+	</div>
+	<div class="result-info pull-left">
+		<table>
+			<tbody>
+			<tr><th>Serial:</th><td id="serial">Not Found</td></tr>
+			<tr><th>MAC:</th><td id="mac">Not Found</td></tr>
+			<tr><th>Model:</th><td id="model">Not Found</td></tr>
+			<tr><th>Image:</th><td id="image"></td></tr>
+			<tr><th>Folder:</th><td id="folder"></td></tr>
+			<tr><th>AP Name:</th><td id="apName"></td></tr>
+			<tr><th>Full Name:</th><td id="fullName"></td></tr>
+			<tr><th>Description:</th><td id="description"></td></tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
+</div>
+
+</main>
+
+
+{% endblock %}
