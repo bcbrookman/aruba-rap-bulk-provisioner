@@ -21,6 +21,7 @@ $('#search-form').submit(function(e) {
             $('#apName').text("Not Found");
             $('#fullName').text("Not Found");
             $('#description').text("Not Found");
+            $('#result-img img').attr('src', ''  + '/static/img/notfound.gif')
 	    } else {
 	        $('#serial').text(response.serialNumber);
             $('#mac').text(response.mac);
@@ -30,7 +31,9 @@ $('#search-form').submit(function(e) {
             $('#apName').text(response.additionalData.deviceName);
             $('#fullName').text(response.additionalData.deviceFullName);
             $('#description').text(response.additionalData.deviceDescription);
+            $('#result-img img').attr('src', '' + '/static/img/' + response.additionalData.img)
 	    }
+
 	    $('#result-loader').addClass("hidden"); // Hide loading spinner
 	    $('#result-info').removeClass("hidden"); // Show result info
 	    $('#result-img').removeClass("hidden"); // Show result info

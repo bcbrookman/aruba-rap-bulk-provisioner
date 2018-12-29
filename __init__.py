@@ -1,12 +1,29 @@
 from flask import Flask, flash, make_response, render_template, request, jsonify
 import json
+import csv
 import sys
+
 
 app = Flask(__name__)
 
 
 with open("static/inventory.json", "r") as file:
     inventory = json.load(file)
+
+
+with open("static/img/map.csv", "r") as file:
+    image_map = csv.reader(file, delimiter=",")
+    images = []
+    for row in image_map:
+        images.append(row)
+
+
+def get_img(model):
+    for r in images:
+        if r[0] == model:
+            return r[1]
+    else:
+        return "notfound.gif"
 
 
 @app.route('/')
@@ -26,12 +43,16 @@ def rap_search():
     query = request.args.get('query', type=str).strip().lower()
     result = jsonify(error="Not Found")
     for device in inventory['devices']:
+
         if query == device["mac"].strip().lower() \
                 or query == device["serialNumber"].strip().lower():
+            device["additionalData"]["img"] = get_img(device["partNumber"])
             result = jsonify(device)
             break
+
         elif device["additionalData"]["deviceFullName"] is not None \
                 and query == device["additionalData"]["deviceFullName"].strip().lower():
+            device["additionalData"]["img"] = get_img(device["partNumber"])
             result = jsonify(device)
             break
     return result
