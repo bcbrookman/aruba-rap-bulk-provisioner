@@ -1,7 +1,6 @@
-from flask import Flask, flash, make_response, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify
 import json
 import csv
-import sys
 
 
 app = Flask(__name__)
@@ -55,6 +54,7 @@ def rap_search():
             device["additionalData"]["img"] = get_img(device["partNumber"])
             result = jsonify(device)
             break
+
     return result
 
 
