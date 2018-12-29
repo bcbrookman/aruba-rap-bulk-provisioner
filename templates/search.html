@@ -12,7 +12,12 @@
         <div id="search-div" class="flex-right">
             <form id="search-form" action="" class="form-group" style="text-align:center">
                 <p><label for="search">Search by MAC Address or Serial Number:</label></p>
-                <input id="search" type="search" class="mx-auto d-block form-control text-center" placeholder="Search">
+                <div class="input-group">
+                  <input id="search" type="search" class="form-control" placeholder="Search...">
+                  <span class="input-group-btn">
+                      <button id="search-btn" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                  </span>
+                </div>
             </form>
         </div>
 	</div>

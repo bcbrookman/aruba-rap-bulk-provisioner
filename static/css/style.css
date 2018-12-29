@@ -105,6 +105,23 @@ h1 {
     text-align: justify;
 }
 
+#search {
+    border-radius: 0px;
+    border: solid 1px #ccc;
+}
+
+#search-form {
+    max-width: 400px;
+    width: 100%;
+}
+
+#search-btn {
+    background-color: #9FD4C9;
+    color: white;
+    border-radius: 0px;
+    border: solid 1px #ccc;
+}
+
 @media (min-width: 768px) {
     #result-img {
         display: block;
@@ -117,20 +134,21 @@ h1 {
     .flex-right {
         flex-grow: 1;
         flex-basis: 0;
-        margin-left: 2em;
+        margin-left: 1.5em;
     }
 
     #search-div {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
     }
 
 
     .flex-left {
         flex-grow: 1;
         flex-basis: 0;
-        margin-right: 2em;
+        margin-right: 1.5em;
     }
 
     .flex-container {
