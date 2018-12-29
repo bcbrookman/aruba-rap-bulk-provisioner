@@ -10,14 +10,26 @@ $('#search-form').submit(function(e) {
 		"method": "GET",
 	})
 	.done(function(response) {
-	    $('#serial').text(response.serialNumber);
-	    $('#mac').text(response.mac);
-	    $('#model').text(response.partNumber);
-	    $('#image').text(response.additionalData.lastBootVersion);
-	    $('#folder').text(response.additionalData.folder);
-	    $('#apName').text(response.additionalData.deviceName);
-	    $('#fullName').text(response.additionalData.deviceFullName);
-	    $('#description').text(response.additionalData.deviceDescription);
+	    console.log(response)
+	    if (response.error == "Not Found") {
+            $('#serial').text("Not Found");
+            $('#mac').text("Not Found");
+            $('#model').text("Not Found");
+            $('#image').text("Not Found");
+            $('#folder').text("Not Found");
+            $('#apName').text("Not Found");
+            $('#fullName').text("Not Found");
+            $('#description').text("Not Found");
+	    } else {
+	        $('#serial').text(response.serialNumber);
+            $('#mac').text(response.mac);
+            $('#model').text(response.partNumber);
+            $('#image').text(response.additionalData.lastBootVersion);
+            $('#folder').text(response.additionalData.folder);
+            $('#apName').text(response.additionalData.deviceName);
+            $('#fullName').text(response.additionalData.deviceFullName);
+            $('#description').text(response.additionalData.deviceDescription);
+	    }
 	    $('#result-loader').addClass("hidden"); // Hide loading spinner
 	    $('#result-info').removeClass("hidden"); // Show result info
     });
