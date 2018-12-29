@@ -9,14 +9,6 @@ with open("static/inventory.json", "r") as file:
     inventory = json.load(file)
 
 
-def get_session_cookie():
-  try:
-    data = json.loads(request.cookies.get('activate'))
-  except TypeError:
-    data = {}
-  return data
-
-
 @app.route('/')
 @app.route('/search')
 def search_page():
@@ -46,22 +38,6 @@ def rap_search():
             break
 
     return result
-
-
-@app.route('/update')
-def update_page():
-    return render_template("update.html", title="Update")
-
-
-@app.route('/bypass')
-@app.route('/mac-bypass')
-def bypass_page():
-    return render_template("bypass.html", title="Bypass")
-
-
-@app.route('/controllers')
-def controllers_page():
-    return render_template("controllers.html", controllers=controllers, title="Controllers")
 
 
 app.run(debug=True)
