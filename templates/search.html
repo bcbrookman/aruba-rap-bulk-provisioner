@@ -1,37 +1,35 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
 <main>
-<div class="container card content">
-	<h2>Search</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-	<hr>
-	<form id="search-form" action="" class="form-group" style="text-align:center">
-		<p><label for="search">Search by MAC Address or Serial Number:</label></p>
-		<input id="search" type="search" class="mx-auto d-block form-control text-center" placeholder="Search">
-	</form>
-</div>
-
-<div id="results" class="container card hidden">
-	<div class="result-info">
-		<img class="center-block" src="/static/img/JY689A.jpg">
-		<table align="center">
-			<tbody>
-			<tr><th>Serial:</th><td id="serial">Not Found</td></tr>
-			<tr><th>MAC:</th><td id="mac">Not Found</td></tr>
-			<tr><th>Model:</th><td id="model">Not Found</td></tr>
-			<tr><th>Image:</th><td id="image">Not Found</td></tr>
-			<tr><th>Folder:</th><td id="folder">Not Found</td></tr>
-			<tr><th>AP Name:</th><td id="apName">Not Found</td></tr>
-			<tr><th>Full Name:</th><td id="fullName">Not Found</td></tr>
-			<tr><th>Description:</th><td id="description">Not Found</td></tr>
-			</tbody>
-		</table>
+	<div class="container card content">
+		<h2>Search</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+		<hr>
+		<form id="search-form" action="" class="form-group" style="text-align:center">
+			<p><label for="search">Search by MAC Address or Serial Number:</label></p>
+			<input id="search" type="search" class="mx-auto d-block form-control text-center" placeholder="Search">
+		</form>
 	</div>
-</div>
 
-
+	<div id="results" class="container card hidden">
+		<div class="result-info">
+			<img class="center-block" src="/static/img/JY689A.jpg">
+			<table align="center">
+				<tbody>
+				<tr><th>Serial:</th><td id="serial">Not Found</td></tr>
+				<tr><th>MAC:</th><td id="mac">Not Found</td></tr>
+				<tr><th>Model:</th><td id="model">Not Found</td></tr>
+				<tr><th>Image:</th><td id="image">Not Found</td></tr>
+				<tr><th>Folder:</th><td id="folder">Not Found</td></tr>
+				<tr><th>AP Name:</th><td id="apName">Not Found</td></tr>
+				<tr><th>Full Name:</th><td id="fullName">Not Found</td></tr>
+				<tr><th>Description:</th><td id="description">Not Found</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </main>
-
 
 {% endblock %}
