@@ -2,6 +2,7 @@
 $('#search-form').submit(function(e) {
     $('#results').removeClass("hidden"); // Show results card
     $('#result-info').addClass("hidden"); // Hide any previous results
+    $('#result-img').addClass("hidden"); // Hide any previous result image
     $('#result-loader').removeClass("hidden"); // Show loading spinner
     var query = $('#search').val();
     console.log('Search submitted with query "' + query + '"');
@@ -32,6 +33,7 @@ $('#search-form').submit(function(e) {
 	    }
 	    $('#result-loader').addClass("hidden"); // Hide loading spinner
 	    $('#result-info').removeClass("hidden"); // Show result info
+	    $('#result-img').removeClass("hidden"); // Show result info
     });
     e.preventDefault();
 });
