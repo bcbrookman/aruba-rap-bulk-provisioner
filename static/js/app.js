@@ -1,5 +1,8 @@
 // Search submission API Call
 $('#search-form').submit(function(e) {
+    $('#results').removeClass("hidden"); // Show results card
+    $('#result-info').addClass("hidden"); // Hide any previous results
+    $('#result-loader').removeClass("hidden"); // Show loading spinner
     var query = $('#search').val();
     console.log('Search submitted with query "' + query + '"');
     $.ajax({
@@ -7,7 +10,6 @@ $('#search-form').submit(function(e) {
 		"method": "GET",
 	})
 	.done(function(response) {
-	    console.log(response);
 	    $('#serial').text(response.serialNumber);
 	    $('#mac').text(response.mac);
 	    $('#model').text(response.partNumber);
@@ -16,7 +18,9 @@ $('#search-form').submit(function(e) {
 	    $('#apName').text(response.additionalData.deviceName);
 	    $('#fullName').text(response.additionalData.deviceFullName);
 	    $('#description').text(response.additionalData.deviceDescription);
-	    $('#results').removeClass("hidden");
+	    $('#result-loader').addClass("hidden"); // Hide loading spinner
+	    $('#result-info').removeClass("hidden"); // Show result info
     });
     e.preventDefault();
 });
+
