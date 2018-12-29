@@ -18,13 +18,14 @@ def get_session_cookie():
 
 
 @app.route('/')
-def home_page():
-    return render_template("home.html", title="Home")
-
-
 @app.route('/search')
 def search_page():
     return render_template("search.html", title="Search")
+
+
+@app.route('/about')
+def about_page():
+    return render_template("about.html", title="About")
 
 
 # search query

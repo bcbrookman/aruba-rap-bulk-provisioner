@@ -4,9 +4,9 @@ var baseAPIURL = baseURL + APIDir;
 
 console.log('app.js loaded');
 
-// Search Button
-$('#search-btn').click(function() {
-    console.log('search button triggered');
+// Search
+$('#search-form').submit(function(e) {
+    console.log('search-form triggered');
     var query = $('#search').val();
     $.ajax({
 		"url": "/api/search?query=" + encodeURI(query),
@@ -24,4 +24,5 @@ $('#search-btn').click(function() {
 	    $('#description').text(response.additionalData.deviceDescription);
 	    $('#results').removeClass("hidden");
     });
+    e.preventDefault();
 });
