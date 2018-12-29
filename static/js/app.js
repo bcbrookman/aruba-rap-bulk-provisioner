@@ -1,13 +1,7 @@
-var baseURL = "https://activate.arubanetworks.com/";
-var APIDir = "api/ext/";
-var baseAPIURL = baseURL + APIDir;
-
-console.log('app.js loaded');
-
-// Search
+// Search submission API Call
 $('#search-form').submit(function(e) {
-    console.log('search-form triggered');
     var query = $('#search').val();
+    console.log('Search submitted with query "' + query + '"');
     $.ajax({
 		"url": "/api/search?query=" + encodeURI(query),
 		"method": "GET",
