@@ -45,7 +45,11 @@ h1 {
 }
 
 .container.content{
-    margin: 120px auto;
+    margin-top: 120px;
+}
+
+.container.card {
+    margin-bottom: 1em;
     background: white;
     padding: 18px;
     border-radius: 8px;
@@ -69,6 +73,16 @@ h1 {
 .title {
     margin-right: auto;
 }
+
+.result-info img {
+    display: none;
+}
+
+.result-info th {
+    text-align: right;
+    padding-right: 10px;
+}
+
 
 /*
 body {
