@@ -100,3 +100,42 @@ h1 {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+#search-text {
+    text-align: justify;
+}
+
+@media (min-width: 768px) {
+    #result-img {
+        display: block;
+    }
+
+    #result-img img {
+        max-width: 200px;
+    }
+
+    .flex-right {
+        flex-grow: 1;
+        flex-basis: 0;
+        margin-left: 2em;
+    }
+
+    #search-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+
+    .flex-left {
+        flex-grow: 1;
+        flex-basis: 0;
+        margin-right: 2em;
+    }
+
+    .flex-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
