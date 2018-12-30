@@ -10,7 +10,7 @@ with open("static/inventory.json", "r") as file:
     inventory = json.load(file)
 
 
-with open("static/img/map.csv", "r") as file:
+with open("static/img/image_map.csv", "r") as file:
     image_map = csv.reader(file, delimiter=",")
     images = []
     for row in image_map:
@@ -19,7 +19,7 @@ with open("static/img/map.csv", "r") as file:
 
 def get_img(model):
     for r in images:
-        if r[0] == model:
+        if r[0] == model and r[1]:
             return r[1]
     else:
         return "notfound.gif"
@@ -59,4 +59,3 @@ def rap_search():
 
 
 app.run(debug=True)
-
