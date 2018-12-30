@@ -1,0 +1,8 @@
+/venv/*
+*.csv
+*.json
+*.db
+*.png
+*.jpg
+*.jpeg
+*.gif
