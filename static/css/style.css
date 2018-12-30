@@ -50,7 +50,7 @@ h1 {
 
 .container.card {
     margin-bottom: 1em;
-    background: white;
+    background: rgb(253, 253, 253);
     padding: 18px;
     border-left: 1px solid #ccc;
     border-bottom: 6px solid #9FD4C9;
@@ -111,8 +111,10 @@ h1 {
 }
 
 #search-form {
-    max-width: 400px;
+    max-width: 350px;
     width: 100%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #search-btn {
