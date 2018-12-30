@@ -10,7 +10,7 @@ with open("static/inventory.json", "r") as file:
     inventory = json.load(file)
 
 
-with open("static/img/image_map.csv", "r") as file:
+with open("static/image_map.csv", "r") as file:
     image_map = csv.reader(file, delimiter=",")
     images = []
     for row in image_map:
