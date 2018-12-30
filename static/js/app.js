@@ -26,7 +26,7 @@ $('#search-form').submit(function(e) {
 	        $('#serial').text(response.serialNumber);
             $('#mac').text(response.mac);
             $('#model').text(response.partNumber);
-            $('#image').text(response.additionalData.lastBootVersion);
+            $('#image').text(response.additionalData.lastAosVersion);
             $('#folder').text(response.additionalData.folder);
             $('#apName').text(response.additionalData.deviceName);
             $('#fullName').text(response.additionalData.deviceFullName);
