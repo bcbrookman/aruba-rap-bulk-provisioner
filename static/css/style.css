@@ -23,6 +23,14 @@ h1 {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
+.title a:hover,
+.title a:active,
+.title a:visited,
+.title a:link {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* Menu */
 .menu-dropdown a:hover,
 .menu-dropdown a:active,
