@@ -126,7 +126,17 @@ h1 {
 
 @media (min-width: 768px) {
     #result-img {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #result-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     #result-img img {
