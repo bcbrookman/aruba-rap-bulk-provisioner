@@ -22,7 +22,7 @@ def get_img(model):
         if r[0] == model and r[1]:
             return r[1]
     else:
-        return "notfound.gif"
+        return "notfound.png"
 
 
 @app.route('/')
