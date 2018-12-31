@@ -1,13 +1,16 @@
 from flask import Flask, render_template, request, jsonify
 import json
 import csv
+import os
+import time
 
 
 app = Flask(__name__)
 
 
-with open("static/inventory.json", "r") as file:
+with open("inventory/inventory.json", "r") as file:
     inventory = json.load(file)
+    inventory_date = time.ctime(os.path.getmtime('inventory.json'))
 
 
 with open("static/image_map.csv", "r") as file:
@@ -46,12 +49,14 @@ def rap_search():
         if query == device["mac"].strip().lower() \
                 or query == device["serialNumber"].strip().lower():
             device["additionalData"]["img"] = get_img(device["partNumber"])
+            device["inventoryDate"] = inventory_date
             result = jsonify(device)
             break
 
         elif device["additionalData"]["deviceFullName"] is not None \
                 and query == device["additionalData"]["deviceFullName"].strip().lower():
             device["additionalData"]["img"] = get_img(device["partNumber"])
+            device["inventoryDate"] = inventory_date
             result = jsonify(device)
             break
 
