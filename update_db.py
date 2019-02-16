@@ -77,7 +77,7 @@ for device in inventory["devices"]:
 
     # Get values from the image_map to determine the path for each image
     # TODO: Replace images list with a dictionary to remove need for loop.
-    img_path = "not found"
+    img_path = "notfound.png"
     for row in images:
         if device["partNumber"] == row[0] and row[1] is not "":
             img_path = row[1]
