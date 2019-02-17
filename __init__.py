@@ -3,10 +3,11 @@ import json
 import csv
 import os
 import time
+from db_models import *
 
+db.connect()
 
 app = Flask(__name__)
-
 
 with open("inventory/inventory.json", "r") as file:
     inventory = json.load(file)
@@ -41,26 +42,52 @@ def about_page():
 
 # search query
 @app.route('/api/search')
-def rap_search():
-    query = request.args.get('query', type=str).strip().lower()
-    result = jsonify(error="Not Found")
-    for device in inventory['devices']:
+def rap_search_db():
+    result = {
+        'devices': []
+    }
 
-        if query == device["mac"].strip().lower() \
-                or query == device["serialNumber"].strip().lower():
-            device["additionalData"]["img"] = get_img(device["partNumber"])
-            device["inventoryDate"] = inventory_date
-            result = jsonify(device)
-            break
+    query = request.args.get('query', type=str).strip()
+    resp = Device.select(Device, Image).join(Image).where(Device.deviceFullName.contains(query) |
+                                                          Device.mac.contains(query) |
+                                                          Device.serialNumber.contains(query) |
+                                                          Device.deviceDescription.contains(query) |
+                                                          Device.deviceName.contains(query)
+                                                          ).dicts()
 
-        elif device["additionalData"]["deviceFullName"] is not None \
-                and query == device["additionalData"]["deviceFullName"].strip().lower():
-            device["additionalData"]["img"] = get_img(device["partNumber"])
-            device["inventoryDate"] = inventory_date
-            result = jsonify(device)
-            break
+    for r in resp:
+        device = {
+            'additionalData': {
+                'apGroupName': r['apGroupName'],
+                'deviceDescription': r['deviceDescription'],
+                'deviceFullName': r['deviceFullName'],
+                'deviceName': r['deviceName'],
+                'firstSeen': r['firstSeen'],
+                'folder': r['folder'],
+                'folderId': r['folderId'],
+                'img': r['image_path'],
+                'lastAosVersion': r['lastAosVersion'],
+                'lastBootVersion': r['lastBootVersion'],
+                'lastSeen': r['lastSeen'],
+                'partCategory': r['partCategory'],
+                'sourceIpAddress': r['sourceIpAddress'],
+                },
+            'firstSeen': r['firstSeen'],
+            'folderId': r['folderId'],
+            'inventoryDate': r['inventoryDate'],
+            'lastSeen': r['lastSeen'],
+            'mac': r['mac'],
+            'serialNumber': r['serialNumber'],
+            'partNumber': r['partNumber'],
+            'status': r['status'],
+            }
+        result['devices'].append(device)
 
-    return result
+    # If there are no results, return Not Found error instead
+    if len(result['devices']) == 0:
+        result = {'error': "Not Found"}
+
+    return jsonify(result)
 
 
 app.run(debug=True)

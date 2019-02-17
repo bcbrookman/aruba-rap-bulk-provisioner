@@ -1,46 +1,12 @@
 import csv
 import json
 import os
-from peewee import *
 import time
-
-
-db = SqliteDatabase('inventory/inventory.db')
-
-
-class Devices(Model):
-    serialNumber = TextField(primary_key=True)
-    mac = TextField()
-    apGroupName = TextField(null=True)
-    deviceDescription = TextField(null=True)
-    deviceFullName = TextField(null=True)
-    deviceName = TextField(null=True)
-    firstSeen = TextField(null=True)
-    folder = TextField(null=True)
-    folderId = TextField(null=True)
-    inventoryDate = TextField(null=True)
-    lastAosVersion = TextField(null=True)
-    lastBootVersion = TextField(null=True)
-    lastSeen = TextField(null=True)
-    partCategory = TextField(null=True)
-    partNumber = TextField(null=True)
-    sourceIpAddress = TextField(null=True)
-    status = TextField(null=True)
-
-    class Meta:
-        database = db
-
-
-class Images(Model):
-    partNumber = ForeignKeyField(Devices, backref='partNumber', primary_key=True)
-    image_path = TextField(null=True)
-
-    class Meta:
-        database = db
+from db_models import *
 
 
 db.connect()
-db.create_tables([Devices, Images])
+db.create_tables([Device, Image])
 
 with open("inventory/inventory.json", "r") as file:
     inventory = json.load(file)
@@ -52,8 +18,8 @@ with open("static/image_map.csv", "r") as file:
     for row in image_map:
         images.append(row)
 
-image_model = Images()
-device_model = Devices()
+image_model = Image()
+device_model = Device()
 
 for device in inventory["devices"]:
     device_model.replace(serialNumber=device["serialNumber"],

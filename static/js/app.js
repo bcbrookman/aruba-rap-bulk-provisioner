@@ -23,6 +23,7 @@ $('#search-form').submit(function(e) {
             $('#description').text("Not Found");
             $('#result-img img').attr('src', ''  + '/static/images/products/notfound.png')
 	    } else {
+	        response = response.devices[0]; // Only display first result for now
 	        $('#serial').text(response.serialNumber);
             $('#mac').text(response.mac);
             $('#model').text(response.partNumber);
