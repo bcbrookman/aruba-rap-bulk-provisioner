@@ -7,7 +7,7 @@ $('#search-form').submit(function(e) {
     var query = $('#search').val();
     console.log('Search submitted with query "' + query + '"');
     $.ajax({
-		"url": "/api/search?query=" + encodeURI(query),
+		"url": "/api/search/" + encodeURI(query),
 		"method": "GET",
 	})
 	.done(function(response) {
@@ -32,7 +32,7 @@ $('#search-form').submit(function(e) {
             $('#apName').text(response.additionalData.deviceName);
             $('#fullName').text(response.additionalData.deviceFullName);
             $('#description').text(response.additionalData.deviceDescription);
-            $('#result-img img').attr('src', '' + '/static/images/products/' + response.additionalData.img)
+            $('#result-img img').attr('src', '' + '/static/search/images/products/' + response.additionalData.img)
 	    }
 	    $('#result-loader').addClass("hidden"); // Hide loading spinner
 	    $('#result-info').removeClass("hidden"); // Show result info

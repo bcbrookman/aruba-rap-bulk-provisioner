@@ -1,12 +1,12 @@
 from django.db import models
 
 
-class Image (models.Model):
+class Image(models.Model):
     partNumber = models.TextField(primary_key=True)
     image_path = models.TextField(null=True)
 
 
-class Device (models.Model):
+class Device(models.Model):
     serialNumber = models.TextField(primary_key=True)
     mac = models.TextField()
     apGroupName = models.TextField(null=True)
