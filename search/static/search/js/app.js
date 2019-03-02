@@ -21,6 +21,7 @@ $('#search-form').submit(function(e) {
             $('#apName').text("Not Found");
             $('#fullName').text("Not Found");
             $('#description').text("Not Found");
+            $('#inventoryDate').text("Not Found");
             $('#result-img img').attr('src', ''  + '/static/images/products/notfound.png')
 	    } else {
 	        response = response.devices[0]; // Only display first result for now
@@ -32,6 +33,7 @@ $('#search-form').submit(function(e) {
             $('#apName').text(response.additionalData.deviceName);
             $('#fullName').text(response.additionalData.deviceFullName);
             $('#description').text(response.additionalData.deviceDescription);
+            $('#inventoryDate').text(response.inventoryDate)
             $('#result-img img').attr('src', '' + '/static/search/images/products/' + response.additionalData.img)
 	    }
 	    $('#result-loader').addClass("hidden"); // Hide loading spinner
