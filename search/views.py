@@ -13,29 +13,25 @@ def search_index(request):
     query = request.GET.get('query')
     print(type(query))
     if query is not None and query != "":
-        devices = Device.objects.select_related('image_path').filter(Q(deviceFullName__icontains=query) |
+        query = query.strip()
+        devices = Device.objects.select_related('image_path').filter(Q(serialNumber__icontains=query) |
                                                                      Q(mac__icontains=query) |
-                                                                     Q(serialNumber__icontains=query) |
+                                                                     Q(mac_cisco__icontains=query) |
+                                                                     Q(mac_dashed__icontains=query) |
+                                                                     Q(mac_bare__icontains=query) |
+                                                                     Q(deviceFullName__icontains=query) |
                                                                      Q(deviceDescription__icontains=query) |
                                                                      Q(deviceName__icontains=query)
-                                                                     ).values('apGroupName',
-                                                                              'deviceDescription',
-                                                                              'deviceFullName',
-                                                                              'deviceName',
-                                                                              'folder',
-                                                                              'folderId',
-                                                                              'partNumber__image_path',
+                                                                     ).values('serialNumber',
+                                                                              'mac',
                                                                               'partNumber',
                                                                               'lastAosVersion',
-                                                                              'lastBootVersion',
-                                                                              'lastSeen',
-                                                                              'partCategory',
-                                                                              'sourceIpAddress',
-                                                                              'firstSeen',
+                                                                              'folder',
+                                                                              'deviceName',
+                                                                              'deviceFullName',
+                                                                              'deviceDescription',
                                                                               'inventoryDate',
-                                                                              'mac',
-                                                                              'serialNumber',
-                                                                              'status',
+                                                                              'partNumber__image_path',
                                                                               )
         # Store total count of results before pagination
         total_count = devices.count()

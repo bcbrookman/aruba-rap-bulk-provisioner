@@ -2,6 +2,7 @@ import csv
 import json
 import os
 import time
+from netaddr import *
 from search.models import Device, Image
 
 
@@ -31,9 +32,17 @@ for device in inventory["devices"]:
     image_model = Image(partNumber=device["partNumber"], image_path=img_path,)
     image_model.save()
 
+    # Convert MAC address to different notations
+    mac_cisco_str = str(EUI(device["mac"], dialect=mac_cisco))
+    mac_dashed_str = str(EUI(device["mac"], dialect=mac_unix))
+    mac_bare_str = str(EUI(device["mac"], dialect=mac_bare))
+
     # Save record in device table
     device_model = Device(serialNumber=device["serialNumber"],
                           mac=device["mac"],
+                          mac_cisco=mac_cisco_str,
+                          mac_dashed=mac_dashed_str,
+                          mac_bare=mac_bare_str,
                           apGroupName=device["additionalData"]["apGroupName"],
                           deviceDescription=device["additionalData"]["deviceDescription"],
                           deviceFullName=device["additionalData"]["deviceFullName"],

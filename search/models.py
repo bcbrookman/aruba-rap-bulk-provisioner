@@ -9,6 +9,9 @@ class Image(models.Model):
 class Device(models.Model):
     serialNumber = models.TextField(primary_key=True)
     mac = models.TextField()
+    mac_cisco = models.TextField(null=True)
+    mac_dashed = models.TextField(null=True)
+    mac_bare = models.TextField(null=True)
     apGroupName = models.TextField(null=True)
     deviceDescription = models.TextField(null=True)
     deviceFullName = models.TextField(null=True)
