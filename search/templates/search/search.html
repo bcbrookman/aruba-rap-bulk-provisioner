@@ -8,39 +8,67 @@
 			<h2>Search</h2>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
 		</div>
-
         <div id="search-div" class="flex-right">
-            <form id="search-form" action="" class="form-group" style="text-align:center">
-                <p><label for="search">Search by MAC Address or Serial Number:</label></p>
-                <div class="input-group">
-                  <input id="search" type="search" class="form-control" placeholder="Search...">
-                  <span class="input-group-btn">
+			<form id="search-form" action="/search" class="form-group" method="get" style="text-align:center">
+				<p><label for="search">Search by MAC Address or Serial Number:</label></p>
+				<div class="input-group">
+					<input id="search" type="search" name="query" class="form-control" placeholder="Search..." value="{{query}}">
+					<span class="input-group-btn">
                       <button id="search-btn" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                   </span>
-                </div>
-            </form>
-        </div>
+				</div>
+			</form>
+		</div>
 	</div>
-	<div id="results" class="container card hidden flex-container">
-		<div id="result-loader" class="center-block hidden"></div>
-		<div id="result-info" class="hidden flex-left">
+	{% for device in devices %}
+	<div class="results container card flex-container">
+		<div class="result-info flex-left">
 			<table align="center">
 				<tbody>
-				<tr><th>Serial:</th><td id="serial">Not Found</td></tr>
-				<tr><th>MAC:</th><td id="mac">Not Found</td></tr>
-				<tr><th>Model:</th><td id="model">Not Found</td></tr>
-				<tr><th>Image:</th><td id="image">Not Found</td></tr>
-				<tr><th>Folder:</th><td id="folder">Not Found</td></tr>
-				<tr><th>AP Name:</th><td id="apName">Not Found</td></tr>
-				<tr><th>Full Name:</th><td id="fullName">Not Found</td></tr>
-				<tr><th>Description:</th><td id="description">Not Found</td></tr>
-				<tr><th>Inventory Date:</th><td id="inventoryDate">Not Found</td></tr>
+				<tr><th>Serial:</th><td class="serial">{{ device.serialNumber }}</td></tr>
+				<tr><th>MAC:</th><td class="mac">{{ device.mac }}</td></tr>
+				<tr><th>Model:</th><td class="model">{{ device.partNumber }}</td></tr>
+				<tr><th>Image:</th><td class="image">{{ device.lastAosVersion }}</td></tr>
+				<tr><th>Folder:</th><td class="folder">{{ device.folder }}</td></tr>
+				<tr><th>AP Name:</th><td class="apName">{{ device.deviceName }}</td></tr>
+				<tr><th>Full Name:</th><td class="fullName">{{ device.deviceFullName }}</td></tr>
+				<tr><th>Description:</th><td class="description">{{ device.deviceDescription }}</td></tr>
+				<tr><th>Inventory Date:</th><td class="inventoryDate">{{ device.inventoryDate }}</td></tr>
 				</tbody>
 			</table>
 		</div>
-        <div id="result-img" class="hidden flex-right">
-            <img class="center-block">
-        </div>
+		<div class="result-img flex-right">
+			<img class="center-block" src="static/search/images/products/{{ device.partNumber__image_path }}">
+		</div>
+	</div>
+	{% endfor %}
+	<div id="paginator-container" class="flex-container container">
+		<div id="paginator-text" class="flex-left">
+			{% if devices.number %}
+				<p>{{devices.start_index}} - {{devices.end_index}} of {{total_count}} results</p>
+			{% endif %}
+		</div>
+		<div id="paginator-nav" class="flex-right">
+			<ul class="pagination">
+				{% if devices.has_previous %}
+					<li><a href="?query={{query}}&page=1">First</a></li>
+					<li><a href="?query={{query}}&page={{ devices.previous_page_number }}">Prev</a></li>
+				{% endif %}
+
+				{% for num in devices.paginator.page_range %}
+					{% if devices.number == num %}
+						<li class="active"><a><strong>{{ num }}</strong></a></li>
+					{% elif num > devices.number|add:'-3' and num < devices.number|add:'3' %}
+						<li><a href="?query={{query}}&page={{num}}">{{num}}</a></li>
+					{% endif %}
+				{% endfor %}
+
+				{% if devices.has_next %}
+					<li><a href="?query={{query}}&page={{ devices.next_page_number }}">Next</a></li>
+					<li><a href="?query={{query}}&page={{ devices.paginator.num_pages }}">Last</a></li>
+				{% endif %}
+			</ul>
+		</div>
 	</div>
 </main>
 
