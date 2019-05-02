@@ -1,7 +1,15 @@
-/venv/*
+*venv/*
+*.idea/*
+*.gitignored-files/*
+*/management/commands/custom_*
 *.json
 *.db
 *.png
 *.jpg
 *.jpeg
 *.gif
+*.xlsx
+*.csv
+*.bak
+*.sqlite3
+*__pycache_*
