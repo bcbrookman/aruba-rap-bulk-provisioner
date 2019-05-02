@@ -11,7 +11,7 @@ with open("inventory/inventory.json", "r") as file:
     inventory_date = time.ctime(os.path.getmtime('inventory/inventory.json'))
 
 
-with open("RAPpy/static/image_map.csv", "r") as file:
+with open("inventory/image_map.csv", "r") as file:
     image_map = csv.reader(file, delimiter=",")
     images = []
     for row in image_map:
