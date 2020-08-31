@@ -46,7 +46,7 @@ def search_index(request):
         page_context["devices"] = devices
         page_context["query"] = query
 
-    return render(request, 'search/search.html', page_context)
+    return render(request, 'RAPpy/search.html', page_context)
 
 
 def search_about(request):
@@ -54,4 +54,4 @@ def search_about(request):
         "title": "About",
     }
 
-    return render(request, "search/about.html", page_context)
+    return render(request, "RAPpy/about.html", page_context)

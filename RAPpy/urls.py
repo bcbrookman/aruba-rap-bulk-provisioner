@@ -6,5 +6,4 @@ urlpatterns = [
     path('', views.search_index, name='index'),
     path('search', views.search_index, name='index'),
     path('about', views.search_about, name='about'),
-    # path('api/search/<query>', views.api_search, name='search'),
 ]
