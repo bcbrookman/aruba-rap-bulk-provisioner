@@ -1,0 +1,16 @@
+../venv/bin
+*/migrations/*
+django_project/*
+manage.py
+*.idea/*
+*.json
+*.db
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.xlsx
+*.csv
+*.bak
+*.sqlite3
+*__pycache_*
