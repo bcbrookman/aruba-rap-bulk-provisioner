@@ -3,7 +3,7 @@ import json
 import os
 import time
 from netaddr import *
-from search.models import Device, Image
+from RAPpy.models import Device, Image
 
 
 with open("inventory/inventory.json", "r") as file:

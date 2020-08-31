@@ -1,5 +1,5 @@
 *venv/*
-migrations/*
+*/migrations/*
 django_project/*
 manage.py
 *.idea/*

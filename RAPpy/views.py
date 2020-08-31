@@ -4,7 +4,7 @@ from django.shortcuts import render
 from . models import Device
 
 
-def search_index(request):
+def RAPpy_index(request):
     page_context = {
         "title": "Search"
     }
@@ -49,9 +49,10 @@ def search_index(request):
     return render(request, 'RAPpy/search.html', page_context)
 
 
-def search_about(request):
+def RAPpy_about(request):
     page_context = {
         "title": "About",
     }
+
 
     return render(request, "RAPpy/about.html", page_context)
