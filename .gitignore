@@ -1,7 +1,8 @@
 *venv/*
+migrations/*
+django_project/*
+manage.py
 *.idea/*
-*.gitignored-files/*
-*/management/commands/custom_*
 *.json
 *.db
 *.png
