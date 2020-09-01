@@ -1,6 +1,7 @@
 import os
 import requests
 import time
+from getpass import getpass
 from django.core.management.base import BaseCommand, CommandError
 
 
@@ -9,8 +10,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Activate credentials
-        username = ""
-        password = ""
+        username = input("Activate username: ")
+        password = getpass("Activate password: ")
 
         # Login to Activate and acquire session cookies
         login_params = {
