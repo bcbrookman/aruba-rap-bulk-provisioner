@@ -46,13 +46,13 @@ class Command(BaseCommand):
                     inventory_response.raise_for_status()
 
                     # Make a copy of existing inventory.json with date appended if exists
-                    if os.path.exists('search/inventory/inventory.json'):
-                        inventory_mtime = time.gmtime(os.path.getmtime('search/inventory/inventory.json'))
-                        os.rename('search/inventory/inventory.json',
-                                  'search/inventory/inventory_{}.json'.format(time.strftime("%m%d%Y_%H%M%S", inventory_mtime)))
+                    if os.path.exists('RAPpy/inventory/inventory.json'):
+                        inventory_mtime = time.gmtime(os.path.getmtime('RAPpy/inventory/inventory.json'))
+                        os.rename('RAPpy/inventory/inventory.json',
+                                  'RAPpy/inventory/inventory_{}.json'.format(time.strftime("%m%d%Y_%H%M%S", inventory_mtime)))
 
                     # Write inventory.json to a file
-                    with open('search/inventory/inventory.json', 'wb') as handle:
+                    with open('RAPpy/inventory/inventory.json', 'wb') as handle:
                         for block in inventory_response.iter_content():
                             handle.write(block)
 
