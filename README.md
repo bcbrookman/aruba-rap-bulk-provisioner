@@ -1,70 +1,35 @@
-## Installation
-Create and activate a new Python3 virtual environment
+## Quickstart Installation
 ```bash
-~$ mkdir django_RAPpy
-~$ cd django_RAPpy
-~/django_RAPpy$ python3 -m venv venv/
-~/django_RAPpy$ source venv/bin/activate
-```
+# Create and activate a new Python3 virtual environment
+mkdir django_RAPpy
+cd django_RAPpy
+python3 -m venv venv/
+source venv/bin/activate
 
-Clone the repo in the current dir
-```bash
-(venv) ~/django_RAPpy$ git clone https://github.com/bcbrookman/RAPpy.git
-Cloning into 'RAPpy'...
-remote: Enumerating objects: 29, done.
-remote: Counting objects: 100% (29/29), done.
-remote: Compressing objects: 100% (19/19), done.
-remote: Total 394 (delta 6), reused 29 (delta 6), pack-reused 365
-Receiving objects: 100% (394/394), 114.79 KiB | 602.00 KiB/s, done.
-Resolving deltas: 100% (154/154), done.
-```
+# Clone the repo in the current dir
+git clone https://github.com/bcbrookman/RAPpy.git
 
-Install django and other dependencies
-```bash
-(venv) ~/django_RAPpy$ pip install -r RAPpy/requirements.txt
-```
+# Install django and other dependencies
+pip install -r RAPpy/requirements.txt
 
-Start a new Django project in the current dir
-```bash
-(venv) ~/django_RAPpy$ django-admin startproject django_RAPpy ./
-```
+# Start a new Django project in the current dir
+django-admin startproject django_RAPpy .
 
-Add RAPpy to the INSTALLED_APPS in the project settings.py file
-```bash
-(venv) ~/django_RAPpy$ nano django_RAPpy/settings.py
-(venv) ~/django_RAPpy$ cat django_RAPpy/settings.py
-...
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'RAPpy',
-]
-```
+# Add RAPpy to INSTALLED_APPS in the project settings.py file
+echo "INSTALLED_APPS.append('RAPpy')" >> django_RAPpy/settings.py
 
-Add RAPpy to the project urls.py file
-```bash
-(venv) ~/django_RAPpy$ nano django_RAPpy/urls.py
-(venv) ~/django_RAPpy$ cat django_RAPpy/urls.py
-...
-from django.urls import include, path
+# Add RAPpy to urlpatterns in the project urls.py file
+echo "from django.urls import include" >> django_RAPpy/urls.py
+echo "urlpatterns.append(path('', include('RAPpy.urls')))" >> django_RAPpy/urls.py
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('RAPpy.urls')),
-]
-```
+# Make and apply migrations
+python manage.py makemigrations
+python manage.py migrate
 
-Make and apply migrations
-```bash
-(venv) ~/django_RAPpy$ python manage.py makemigrations
-(venv) ~/django_RAPpy$ python manage.py migrate
-```
+# Update the database with the initial inventory
+python manage.py get_inventory
+python manage.py update_db
 
-Use the development server to test the installation
-```bash
-(venv) ~/django_RAPpy$ python manage.py runserver
+# Run the development server to test the installation
+python manage.py runserver
 ```
