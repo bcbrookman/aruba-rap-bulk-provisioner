@@ -13,14 +13,14 @@ class Command(BaseCommand):
     help = 'Updates the inventory database using inventory.json and the image map'
 
     def handle(self, *args, **options):
-        with open("search/inventory/inventory.json", "r") as file:
+        with open("RAPpy/inventory/inventory.json", "r") as file:
             inventory = json.load(file)
-            # inventory_date = time.ctime(os.path.getmtime('search/inventory/inventory.json'))
+            # inventory_date = time.ctime(os.path.getmtime('RAPpy/inventory/inventory.json'))
             inventory_date = datetime.strptime(
-                time.ctime(os.path.getmtime('search/inventory/inventory.json')), "%a %b %d %H:%M:%S %Y")\
+                time.ctime(os.path.getmtime('RAPpy/inventory/inventory.json')), "%a %b %d %H:%M:%S %Y")\
                 .isoformat()  # Convert to ISO8601
 
-        with open("search/inventory/image_map.csv", "r") as file:
+        with open("RAPpy/inventory/image_map.csv", "r") as file:
             image_map = csv.reader(file, delimiter=",")
             images = []
             for row in image_map:
