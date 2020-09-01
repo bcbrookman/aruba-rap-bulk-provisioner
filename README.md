@@ -30,7 +30,7 @@ python manage.py makemigrations
 python manage.py migrate
 
 # Update the database with the initial inventory
-# python manage.py get_inventory
+python manage.py get_inventory
 python manage.py update_db
 
 # Run the development server to test the installation
