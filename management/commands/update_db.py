@@ -12,7 +12,7 @@ from django.core.management.base import BaseCommand, CommandError
 class Command(BaseCommand):
     help = 'Updates the inventory database using inventory.json and the image map'
 
-    def handle(self, *args, **options)
+    def handle(self, *args, **options):
         with open("search/inventory/inventory.json", "r") as file:
             inventory = json.load(file)
             # inventory_date = time.ctime(os.path.getmtime('search/inventory/inventory.json'))
