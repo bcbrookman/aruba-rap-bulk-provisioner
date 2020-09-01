@@ -1,1 +1,82 @@
-
+{
+  "info": {
+    "api": "inventory",
+    "version": "1.4"
+  },
+  "message": {
+    "text": "3 devices returned",
+    "code": 0
+  },
+  "totalCount": 3,
+  "devices": [
+    {
+      "mac": "11:11:11:11:11:11",
+      "serialNumber": "SN1111111",
+      "partNumber": "RAP-111",
+      "status": "provisioned",
+      "folderId": "11111111-1111-1111-1111-111111111111",
+      "firstSeen": "2020-01-11 11:11:11",
+      "lastSeen": "2020-01-11 11:11:11",
+      "additionalData": {
+        "deviceName": "rap1_deviceName",
+        "deviceFullName": "rap1_deviceFullName",
+        "deviceDescription": "rap1_deviceDescription",
+        "apGroupName": "rap1_apGroupName",
+        "folder": "rap1_folder",
+        "folderId": "11111111-1111-1111-1111-111111111111",
+        "firstSeen": "2020-01-11 11:11:11",
+        "lastSeen": "2020-01-11 11:11:11",
+        "lastAosVersion": "1.1.1.1-1.1.1.1_11111",
+        "lastBootVersion": null,
+        "sourceIpAddress": "11.11.111.11",
+        "partCategory": "IAP"
+      }
+    },
+    {
+      "mac": "22:22:22:22:22:22",
+      "serialNumber": "SN2222222",
+      "partNumber": "RAP-222",
+      "status": "provisioned",
+      "folderId": "22222222-2222-2222-2222-222222222222",
+      "firstSeen": "2020-02-22 22:22:22",
+      "lastSeen": "2020-02-22 22:22:22",
+      "additionalData": {
+        "deviceName": "rap2_deviceName",
+        "deviceFullName": "rap2_deviceFullName",
+        "deviceDescription": "rap2_deviceDescription",
+        "apGroupName": "rap2_apGroupName",
+        "folder": "rap2_folder",
+        "folderId": "22222222-2222-2222-2222-222222222222",
+        "firstSeen": "2020-02-22 22:22:22",
+        "lastSeen": "2020-02-22 22:22:22",
+        "lastAosVersion": "2.2.2.2-2.2.2.2_22222",
+        "lastBootVersion": null,
+        "sourceIpAddress": "22.22.222.22",
+        "partCategory": "IAP"
+      }
+    },
+    {
+      "mac": "33:33:33:33:33:33",
+      "serialNumber": "SN3333333",
+      "partNumber": "RAP-333",
+      "status": "provisioned",
+      "folderId": "33333333-3333-3333-3333-333333333333",
+      "firstSeen": "2020-03-33 33:33:33",
+      "lastSeen": "2020-03-33 33:33:33",
+      "additionalData": {
+        "deviceName": "rap3_deviceName",
+        "deviceFullName": "rap3_deviceFullName",
+        "deviceDescription": "rap3_deviceDescription",
+        "apGroupName": "rap3_apGroupName",
+        "folder": "rap3_folder",
+        "folderId": "33333333-3333-3333-3333-333333333333",
+        "firstSeen": "2020-03-33 33:33:33",
+        "lastSeen": "2020-03-33 33:33:33",
+        "lastAosVersion": "3.3.3.3-3.3.3.3_33333",
+        "lastBootVersion": null,
+        "sourceIpAddress": "33.33.333.33",
+        "partCategory": "IAP"
+      }
+    }
+  ]
+}
