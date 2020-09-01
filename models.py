@@ -20,6 +20,7 @@ class Device(models.Model):
     folder = models.TextField(null=True)
     folderId = models.TextField(null=True)
     inventoryDate = models.TextField(null=True)
+    inventoryFileDate = models.TextField(null=True)
     lastAosVersion = models.TextField(null=True)
     lastBootVersion = models.TextField(null=True)
     lastSeen = models.TextField(null=True)
